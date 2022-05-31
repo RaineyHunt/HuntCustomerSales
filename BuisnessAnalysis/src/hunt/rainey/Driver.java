@@ -1,6 +1,11 @@
 package hunt.rainey;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Driver {
 
@@ -35,7 +40,24 @@ public class Driver {
 		System.out.println(w.toString());
 	}
 	public static boolean pCodeVeri(String x) {
+		ArrayList<String> postal = new ArrayList<>();
+		loadCodes(postal);
+		System.out.println(postal.get(3));
 		return true;
+	}
+	
+	private static void loadCodes(ArrayList<String> words) {
+		File f = new File("postal_codes.csv");
+		try {
+			Scanner inFile = new Scanner(f);
+			while(inFile.hasNextLine()) {
+				words.add(inFile.nextLine());
+			}
+			inFile.close();
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
+		
 	}
 	
 	public static boolean cCardVeri(int x) {
