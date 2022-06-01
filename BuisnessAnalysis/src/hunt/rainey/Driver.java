@@ -38,7 +38,7 @@ public class Driver {
 			e = in.nextLong();
 			String es = String.valueOf(e);
 			if(es.length() >= 9) {
-				if(cCardVeri(e)) {
+				if(cCardVeri(es)) {
 					valid = true;
 				}
 			}
@@ -75,8 +75,47 @@ public class Driver {
 		
 	}
 	
-	private static boolean cCardVeri(long e) {
+	private static boolean cCardVeri(String e) {
+		String rev = reverse(e);
+		System.out.println(rev);
+		int odd = sumOdd(rev);
+		System.out.println(odd);
+		int even = sumEven(rev);
+		System.out.println(even);
 		return true;
+	}
+	private static int sumEven(String rev) {
+		if(rev.length() == 0) {
+			return 0;
+		}
+		if(rev.length()%2 != 0) {
+			return 0 + sumOdd(rev.substring(1));
+		}
+		int count = Integer.valueOf(rev.substring(0,1));
+		count = count *2;
+		System.out.println(count);
+		
+		return count + sumOdd(rev.substring(1));
+	}
+	private static int sumOdd(String rev) {
+		if(rev.length() == 0) {
+			return 0;
+		}
+		if(rev.length()%2 == 0) {
+			return 0 + sumOdd(rev.substring(1));
+		}
+		int count = Integer.valueOf(rev.substring(0,1));
+		
+		return count + sumOdd(rev.substring(1));
+	}
+	private static String reverse(String e) {
+		if(e.length() == 1) {
+			return e;
+		}
+		//49927398716
+		String sub = e.substring(e.length()-1);
+		return sub + reverse(e. substring(0, e.length()-1) );
+		
 	}
 
 }
