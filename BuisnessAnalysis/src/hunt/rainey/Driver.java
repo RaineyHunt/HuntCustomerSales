@@ -42,7 +42,7 @@ public class Driver {
 	public static boolean pCodeVeri(String x) {
 		ArrayList<String> postal = new ArrayList<>();
 		loadCodes(postal);
-		System.out.println(postal.get(3));
+		System.out.println(postal.size());
 		return true;
 	}
 	
@@ -50,6 +50,7 @@ public class Driver {
 		File f = new File("postal_codes.csv");
 		try {
 			Scanner inFile = new Scanner(f);
+			inFile.useDelimiter("|");
 			while(inFile.hasNextLine()) {
 				words.add(inFile.nextLine());
 			}
