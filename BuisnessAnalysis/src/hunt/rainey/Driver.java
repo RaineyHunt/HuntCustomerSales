@@ -18,7 +18,7 @@ public class Driver {
 		System.out.println("Please enter your City of residence");
 		String c = in.next();
 		String d = "";
-		int e = 0;
+		long e = 0;
 		ArrayList<String> postal = new ArrayList<>();
 		loadCodes(postal);
 		boolean valid = false;
@@ -35,7 +35,7 @@ public class Driver {
 		valid = false;
 		while(!valid) {
 			System.out.println("Please enter your credit card number; 9 digits MINIMUM");
-			e = in.nextInt();
+			e = in.nextLong();
 			String es = String.valueOf(e);
 			if(es.length() >= 9) {
 				if(cCardVeri(e)) {
@@ -43,7 +43,7 @@ public class Driver {
 				}
 			}
 		}
-		Customer w = new Customer(a,b,c,d,e);
+		Customer w = new Customer(a,b,c,d.toUpperCase(),e);
 		System.out.println(w.toString());
 	}
 	private static boolean pCodeVeri(String x, ArrayList<String> postal) {
@@ -75,7 +75,7 @@ public class Driver {
 		
 	}
 	
-	private static boolean cCardVeri(int x) {
+	private static boolean cCardVeri(long e) {
 		return true;
 	}
 

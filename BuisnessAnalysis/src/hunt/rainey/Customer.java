@@ -6,15 +6,15 @@ public class Customer {
 	private int id;
 	private String city;
 	private String pCode;
-	private int cCard;
+	private long cCard;
 	
-	Customer(String s, String a, String d, String g, int h){
+	Customer(String s, String a, String d, String g, long e){
 		first = s;
 		last = a;
 		id = 1;
 		city = d;
 		pCode = g;
-		cCard = h;
+		cCard = e;
 	}
 	
 	@Override
