@@ -37,7 +37,7 @@ public class Driver {
 			System.out.println("Please enter your credit card number; 9 digits MINIMUM");
 			e = in.nextInt();
 			String es = String.valueOf(e);
-			if(es.length() == 9) {
+			if(es.length() >= 9) {
 				if(cCardVeri(e)) {
 					valid = true;
 				}
