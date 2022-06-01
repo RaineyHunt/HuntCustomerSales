@@ -19,11 +19,13 @@ public class Driver {
 		String c = in.next();
 		String d = "";
 		int e = 0;
+		ArrayList<String> postal = new ArrayList<>();
+		loadCodes(postal);
 		boolean valid = false;
 		while(!valid) {
 			System.out.println("Please enter your postal code");
 			d = in.next();
-			if(pCodeVeri(d)) {
+			if(pCodeVeri(d, postal)) {
 				valid = true;
 			}
 			
@@ -39,10 +41,9 @@ public class Driver {
 		Customer w = new Customer(a,b,c,d,e);
 		System.out.println(w.toString());
 	}
-	public static boolean pCodeVeri(String x) {
-		ArrayList<String> postal = new ArrayList<>();
-		loadCodes(postal);
+	private static boolean pCodeVeri(String x, ArrayList<String> postal) {
 		System.out.println(postal.size());
+		System.out.println(postal.get(1));
 		return true;
 	}
 	
@@ -52,8 +53,11 @@ public class Driver {
 			Scanner inFile = new Scanner(f);
 			inFile.useDelimiter("|");
 			while(inFile.hasNextLine()) {
-				words.add(inFile.nextLine());
+				String c = inFile.nextLine();
+				String[] s = c.split("\\|");
+				words.add(s[0]);
 			}
+			words.remove(0);
 			inFile.close();
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
@@ -61,7 +65,7 @@ public class Driver {
 		
 	}
 	
-	public static boolean cCardVeri(int x) {
+	private static boolean cCardVeri(int x) {
 		return true;
 	}
 
