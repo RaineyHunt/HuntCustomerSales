@@ -23,28 +23,38 @@ public class Driver {
 		loadCodes(postal);
 		boolean valid = false;
 		while(!valid) {
-			System.out.println("Please enter your postal code");
+			System.out.println("Please enter your postal code; At LEAST 3 characters");
 			d = in.next();
-			if(pCodeVeri(d, postal)) {
-				valid = true;
+			if(d.length() >= 3) {
+				if(pCodeVeri(d, postal)) {
+					valid = true;
+				}
 			}
 			
 		}
 		valid = false;
 		while(!valid) {
-			System.out.println("Please enter your credit card number");
+			System.out.println("Please enter your credit card number; 9 digits MINIMUM");
 			e = in.nextInt();
-			if(cCardVeri(e)) {
-				valid = true;
+			String es = String.valueOf(e);
+			if(es.length() == 9) {
+				if(cCardVeri(e)) {
+					valid = true;
+				}
 			}
 		}
 		Customer w = new Customer(a,b,c,d,e);
 		System.out.println(w.toString());
 	}
 	private static boolean pCodeVeri(String x, ArrayList<String> postal) {
-		System.out.println(postal.size());
-		System.out.println(postal.get(1));
-		return true;
+		String code = x.substring(0,3).toUpperCase();
+		System.out.println(code);
+		for(String s: postal) {
+			if(code.equals(s)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	private static void loadCodes(ArrayList<String> words) {
