@@ -44,7 +44,28 @@ public class Driver {
 			}
 		}
 		Customer w = new Customer(a,b,c,d.toUpperCase(),e);
-		System.out.println(w.toString());
+		Customer p = new Customer("Person","Nota-Fakename","Realplace","T0BS984HS0HNA",e);
+		System.out.println(w.toString() + p.toString());
+		ArrayList<Customer> customers = new ArrayList<>();
+		customers.add(w);
+		customers.add(p);
+		File res = new File("customerInfo.csv");
+		try {
+			FileWriter wri = new FileWriter(res);
+			wri.write("");
+			wri.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			FileWriter out = new FileWriter(res, true);
+			for(Customer q : customers) {
+				out.write(String.valueOf(q.getId()) +", " + String.valueOf(q.getName()) + "," + String.valueOf(q.getCity()) + "," + String.valueOf(q.getCode()) + "," + String.valueOf(q.getCard()) + System.getProperty("line.separator"));
+			}
+			out.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 	private static boolean pCodeVeri(String x, ArrayList<String> postal) {
 		String code = x.substring(0,3).toUpperCase();
@@ -77,11 +98,11 @@ public class Driver {
 	
 	private static boolean cCardVeri(String e) {
 		String rev = reverse(e);
-		System.out.println(rev);
 		int odd = sumOdd(rev);
-		System.out.println(odd);
 		int even = sumEven(rev);
-		System.out.println(even);
+		if((even + odd)%10 !=0) {
+			return false;
+		}
 		return true;
 	}
 	private static int sumEven(String rev) {
@@ -89,13 +110,16 @@ public class Driver {
 			return 0;
 		}
 		if(rev.length()%2 != 0) {
-			return 0 + sumOdd(rev.substring(1));
+			return 0 + sumEven(rev.substring(1));
 		}
 		int count = Integer.valueOf(rev.substring(0,1));
-		count = count *2;
-		System.out.println(count);
+		count = count * 2;
 		
-		return count + sumOdd(rev.substring(1));
+		if(count >9) {
+			count = (count/10) + (count%10);
+		}
+		
+		return count + sumEven(rev.substring(1));
 	}
 	private static int sumOdd(String rev) {
 		if(rev.length() == 0) {

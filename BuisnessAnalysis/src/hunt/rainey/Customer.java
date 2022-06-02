@@ -3,22 +3,43 @@ package hunt.rainey;
 public class Customer {
 	private String first;
 	private String last;
-	private int id;
+	static int nextId = 1;
 	private String city;
 	private String pCode;
 	private long cCard;
-	
+	private int id;
 	Customer(String s, String a, String d, String g, long e){
 		first = s;
 		last = a;
-		id = 1;
+		id = nextId;
 		city = d;
 		pCode = g;
 		cCard = e;
+		nextId++;
 	}
 	
 	@Override
 	public String toString() {
-		return String.format("Customer ID: %d %nName: %s %s %nCity: %s Postal Code: %s", id,first,last,city, pCode);
+		return String.format("%nCustomer ID: %d %nName: %s %s %nCity: %s Postal Code: %s", id,first,last,city, pCode);
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public String getName() {
+		return first + " " + last;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public String getCode() {
+		return pCode;
+	}
+
+	public long getCard() {
+		return cCard;
 	}
 }
