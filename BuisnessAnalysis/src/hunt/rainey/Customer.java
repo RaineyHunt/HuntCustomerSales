@@ -42,4 +42,5 @@ public class Customer {
 	public long getCard() {
 		return cCard;
 	}
+
 }
