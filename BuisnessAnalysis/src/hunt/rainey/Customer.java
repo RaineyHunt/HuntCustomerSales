@@ -1,6 +1,6 @@
 package hunt.rainey;
 
-public class Customer {
+public class Customer implements Comparable<Customer>{
 	private String first;
 	private String last;
 	static int nextId = 1;
@@ -41,6 +41,33 @@ public class Customer {
 
 	public long getCard() {
 		return cCard;
+	}
+
+	@Override
+	public int compareTo(Customer o) {
+		if (getId() <o.getId()){
+			return -1;
+		}
+		else if (getId()> o.getId()){
+			return 1;
+		}
+		return 0;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Customer) {
+			Customer a = (Customer) o;
+			if (id == a.getId()) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			return false;
+		}
 	}
 
 }

@@ -65,7 +65,25 @@ public class Driver {
 				
 			}
 			else if(menu == 3) {
-				customers.printInfo();
+				File res = new File("customerInfo.csv");
+				try {
+					FileWriter wri = new FileWriter(res);
+					wri.write("");
+					wri.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				try {
+					FileWriter out = new FileWriter(res, true);
+					ArrayList<Customer> customerArchive = new ArrayList<>();
+					customerArchive = customers.getArchive(customerArchive);
+					for(Customer q : customerArchive) {
+						out.write(String.valueOf(q.getId()) +", " + String.valueOf(q.getName()) + "," + String.valueOf(q.getCity()) + "," + String.valueOf(q.getCode()) + "," + String.valueOf(q.getCard()) + System.getProperty("line.separator"));
+					}
+					out.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 			}
 			else if(menu == 4) {
 				
