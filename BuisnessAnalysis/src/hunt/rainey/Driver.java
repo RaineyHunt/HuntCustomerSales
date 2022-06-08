@@ -15,6 +15,7 @@ public class Driver {
 
 	public static void main(String[] args) {
 		CustomerArchive customers = new CustomerArchive();
+		Sales sales = new Sales();
 		boolean cont = true;
 		while(cont) {
 			// display menu directory
@@ -79,6 +80,33 @@ public class Driver {
 				customers.displayArchive();
 			}
 			else if(menu ==2) {
+				File f = new File("sales.csv");
+				try {
+					Scanner inFile = new Scanner(f);
+					
+					// add given sales data to an array list
+					while(inFile.hasNextLine()) {
+						String c = inFile.nextLine();
+						boolean firstLine = false;
+						
+						// ensure the headings aren't included in the array list
+						if(c.equals("Postal Code,Sales")) {
+							firstLine = true;
+						}
+						String[] s = c.split("\\,");
+						if(!firstLine) {
+							int integer = Integer.valueOf(s[1]);
+							Sale g = new Sale(s[0], integer);
+							sales.add(g);
+						}	
+					}
+					inFile.close();
+				} catch (FileNotFoundException e) {
+					System.out.println(e.getMessage());
+				}
+				
+				//show the array list
+				sales.print();
 				
 			}
 			else if(menu == 3) {
@@ -86,7 +114,12 @@ public class Driver {
 				customers.print();
 				System.out.println("Information is in 'customerInfo.csv' file");			}
 			else if(menu == 4) {
-				
+				if(sales.checkFraud()) {
+					
+				}
+				else {
+					
+				}
 			}
 			else if(menu == 5) {
 				// find account of that id
