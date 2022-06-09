@@ -9,10 +9,6 @@ public class Sale {
 		saleData = i;
 	}
 	
-	public String giveCode() {
-		return postalCode;
-	}
-	
 	public int giveSales() {
 		return saleData;
 	}
