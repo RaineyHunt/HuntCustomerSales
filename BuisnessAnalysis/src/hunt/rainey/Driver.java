@@ -17,15 +17,23 @@ public class Driver {
 		CustomerArchive customers = new CustomerArchive();
 		Sales sales = new Sales();
 		boolean cont = true;
+		boolean customer = false;
+		boolean loaded =false;
 		while(cont) {
 			// display menu directory
 			System.out.println("Buisness Analysis System");
-			System.out.println("Enter the corresponding number to open");
+			System.out.println("Enter the corresponding number to open each menu");
 			System.out.println("(1) Enter Customer Information");
 			System.out.println("(2) Sales Report");
-			System.out.println("(3) Print Customer Information to CSV file");
-			System.out.println("(4) Sales Fraud Report");
-			System.out.println("(5) Remove Customer");
+			if(customer) {
+				System.out.println("(3) Print Customer Information to CSV file");
+				System.out.println("(4) Remove Customer");
+			}
+			if(loaded) {
+				System.out.println("(5) Sales Fraud Report");
+			}
+			
+			
 			Scanner in = new Scanner(System.in);
 			
 			// check what menu to open
@@ -78,6 +86,7 @@ public class Driver {
 				customers.add(w);
 				customers.sort();
 				customers.displayArchive();
+				customer = true;
 			}
 			else if(menu ==2) {
 				File f = new File("sales.csv");
@@ -107,38 +116,58 @@ public class Driver {
 				
 				//show the array list
 				sales.print();
+				loaded = true;
 				
 			}
 			else if(menu == 3) {
-				// print all customer information into csv file
-				customers.print();
-				System.out.println("Information is in 'customerInfo.csv' file");			}
-			else if(menu == 4) {
-				//check for fraud
-				if(sales.checkFraud(in)) {
-					// show that there is fraud
-					System.out.println(" which is completly unacceptable, there is OBVIOUSLY fraud in the given sales data!");
-					System.out.println(" ");
+				if(customer) {
+					// print all customer information into csv file
+					customers.print();
+					System.out.println("Information is in 'customerInfo.csv' file");
 				}
 				else {
-					// show that there isn't fraud
-					System.out.println(" which is perfectly acceptable, it is very unlikly that there is fraud in this sales data!");
-					System.out.println(" ");
+					// Say that the menu isn't available at the moment
+					System.out.println("This menu isn't avaliable at this moment; Try adding a customer");
+				}
+			}
+			else if(menu == 4) {
+				if(customer) {
+					// find account of that id
+					System.out.println("What is the ID of the customer information you would like to remove?");
+					int id = in.nextInt();
+					int loc = customers.findAccount(id);
+					if(loc == -1) {
+						// say that account doesn't exist
+						System.out.println("There is no Account of that id");
+					}
+					else{
+						// remove account
+						Customer t = customers.get(loc);
+						customers.remove(t);
+					}
+				}
+				else {
+					// Say that the menu isn't available at the moment
+					System.out.println("This menu isn't avaliable at this moment; Try adding a customer");
 				}
 			}
 			else if(menu == 5) {
-				// find account of that id
-				System.out.println("What is the ID of the customer information you would like to remove?");
-				int id = in.nextInt();
-				int loc = customers.findAccount(id);
-				if(loc == -1) {
-					// say that account doesn't exist
-					System.out.println("There is no Account of that id");
+				if(loaded) {
+					//check for fraud
+					if(sales.checkFraud(in)) {
+						// show that there is fraud
+						System.out.println(" which is completly unacceptable, there is OBVIOUSLY fraud in the given sales data!");
+						System.out.println(" ");
+					}
+					else {
+						// show that there isn't fraud
+						System.out.println(" which is perfectly acceptable, it is very unlikly that there is fraud in this sales data!");
+						System.out.println(" ");
+					}
 				}
-				else{
-					// remove account
-					Customer t = customers.get(loc);
-					customers.remove(t);
+				else {
+					// Say that the menu isn't available at the moment
+					System.out.println("This menu isn't avaliable at this moment; Try loading sales data");
 				}
 			}
 			else {
@@ -165,7 +194,6 @@ public class Driver {
 	 */
 	private static boolean pCodeVeri(String x, ArrayList<String> postal) {
 		String code = x.substring(0,3).toUpperCase();
-		System.out.println(code);
 		for(String s: postal) {
 			if(code.equals(s)) {
 				return true;

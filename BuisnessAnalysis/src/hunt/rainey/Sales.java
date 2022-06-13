@@ -130,8 +130,8 @@ public class Sales {
 				System.out.print("#");
 			}
 			System.out.println(" ");
-			System.out.println(" ");
 		}
+		System.out.println(" ");
 	}
 	
 	/**
