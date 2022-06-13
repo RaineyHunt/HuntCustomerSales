@@ -114,11 +114,16 @@ public class Driver {
 				customers.print();
 				System.out.println("Information is in 'customerInfo.csv' file");			}
 			else if(menu == 4) {
-				if(sales.checkFraud()) {
+				//check for fraud
+				if(sales.checkFraud(in)) {
+					// show that there is fraud
 					System.out.println(" which is completly unacceptable, there is OBVIOUSLY fraud in the given sales data!");
+					System.out.println(" ");
 				}
 				else {
+					// show that there isn't fraud
 					System.out.println(" which is perfectly acceptable, it is very unlikly that there is fraud in this sales data!");
+					System.out.println(" ");
 				}
 			}
 			else if(menu == 5) {
