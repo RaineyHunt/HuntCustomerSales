@@ -151,4 +151,32 @@ public class Sales {
 		System.out.println(" ");
 	}
 	
+	/**
+	 * check if a postal code already has sales registered
+	 * @param i
+	 * @return boolean
+	 */
+	public boolean codeExists(String i) {
+		for(Sale s: salesData) {
+			if(s.giveCode().equals(i)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Give a Sale class already in this Sales
+	 * @param code
+	 * @return Sale
+	 */
+	public Sale giveSale(String code) {
+		for(Sale i: salesData) {
+			if(i.giveCode().equals(code)) {
+				return i;
+			}
+		}
+		return null;
+	}
+	
 }

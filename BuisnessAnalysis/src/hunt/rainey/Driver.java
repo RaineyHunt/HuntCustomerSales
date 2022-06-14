@@ -17,6 +17,8 @@ public class Driver {
 		CustomerArchive customers = new CustomerArchive();
 		Sales sales = new Sales();
 		boolean cont = true;
+		
+		// limit menus based on other needed prerequisites 
 		boolean customer = false;
 		boolean loaded =false;
 		while(cont) {
@@ -31,8 +33,8 @@ public class Driver {
 			}
 			if(loaded) {
 				System.out.println("(5) Sales Fraud Report");
+				System.out.println("(6) Add New Sales");
 			}
-			
 			
 			Scanner in = new Scanner(System.in);
 			
@@ -170,6 +172,22 @@ public class Driver {
 					System.out.println("This menu isn't avaliable at this moment; Try loading sales data");
 				}
 			}
+			else if(menu == 6) {
+				// find the postal code
+				System.out.println("What is the postal code in which you would like to add sales to?");
+				String code = in.next();
+				// find the sales
+				System.out.println("What is the value of sales you would like to add?");
+				int i = in.nextInt();
+				// check if the postal code already has sales
+				if(sales.codeExists(code)) {
+					Sale s = sales.giveSale(code);
+					s.addToSales(i);
+				}
+				else {
+					Sale s = new Sale(code, i);
+				}
+			}
 			else {
 				// Say that the menu doesn't exist
 				System.out.println("That was an Invalid menu option");
@@ -294,7 +312,6 @@ public class Driver {
 		if(e.length() == 1) {
 			return e;
 		}
-		//49927398716
 		String sub = e.substring(e.length()-1);
 		return sub + reverse(e. substring(0, e.length()-1) );
 		

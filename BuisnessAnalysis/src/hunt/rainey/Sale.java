@@ -28,6 +28,22 @@ public class Sale {
 	}
 	
 	/**
+	 * give the postal code
+	 * @return String
+	 */
+	public String giveCode() {
+		return postalCode;
+	}
+	
+	/**
+	 * Add new sales data
+	 * @param i
+	 */
+	public void addToSales(int i) {
+		saleData += i;
+	}
+	
+	/**
 	 * show each total sales as a string
 	 */
 	@Override
