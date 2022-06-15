@@ -38,6 +38,14 @@ public class Sales {
 	}
 	
 	/**
+	 * remove a sale from the sales list
+	 * @param s
+	 */
+	public void remove(int s) {
+		salesData.remove(s);
+	}
+	
+	/**
 	 * Check for fraud in the sales data with the option to show representations of first digit distribution
 	 * @param in
 	 * @return boolean
@@ -170,13 +178,18 @@ public class Sales {
 	 * @param code
 	 * @return Sale
 	 */
-	public Sale giveSale(String code) {
-		for(Sale i: salesData) {
-			if(i.giveCode().equals(code)) {
+	public Sale giveSale(int loc) {
+		return salesData.get(loc);
+	}
+
+	public int findSale(String code) {
+		for(int i =0; i<salesData.size(); i++) {
+			Sale s = salesData.get(i);
+			if(s.giveCode().equals(code)) {
 				return i;
 			}
 		}
-		return null;
+		return -1;
 	}
 	
 }

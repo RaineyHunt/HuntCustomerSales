@@ -34,6 +34,7 @@ public class Driver {
 			if(loaded) {
 				System.out.println("(5) Sales Fraud Report");
 				System.out.println("(6) Add New Sales");
+				System.out.println("(7) Remove Postal Code");
 			}
 			
 			Scanner in = new Scanner(System.in);
@@ -173,19 +174,51 @@ public class Driver {
 				}
 			}
 			else if(menu == 6) {
-				// find the postal code
-				System.out.println("What is the postal code in which you would like to add sales to?");
-				String code = in.next();
-				// find the sales
-				System.out.println("What is the value of sales you would like to add?");
-				int i = in.nextInt();
-				// check if the postal code already has sales
-				if(sales.codeExists(code)) {
-					Sale s = sales.giveSale(code);
-					s.addToSales(i);
+				if(loaded) {
+					// find the postal code
+					System.out.println("What is the postal code in which you would like to add sales to?");
+					String code = in.next();
+					code = code.toUpperCase();
+					// find the sales
+					System.out.println("What is the value of sales you would like to add?");
+					int i = in.nextInt();
+					// check if the postal code already has sales
+					if(sales.codeExists(code)) {
+						int loc = sales.findSale(code);
+						if(loc != -1) {
+							Sale s = sales.giveSale(loc);
+							s.addToSales(i);
+						}
+					}
+					else {
+						Sale s = new Sale(code, i);
+						sales.add(s);
+					}
+					sales.print();
 				}
 				else {
-					Sale s = new Sale(code, i);
+					// Say that the menu isn't available at the moment
+					System.out.println("This menu isn't avaliable at this moment; Try loading sales data");
+				}
+			}
+			else if(menu == 7) {
+				if(loaded) {
+					//find what postal code to remove
+					System.out.println("What is the postal code which you would like to remove");
+					String code = in.next();
+					code = code.toUpperCase();
+					if(sales.codeExists(code)) {
+						int s = sales.findSale(code);
+						sales.remove(s);
+						sales.print();
+					}
+					else {
+						System.out.println("That code isn't in the sales list");
+					}
+				}
+				else {
+					// Say that the menu isn't available at the moment
+					System.out.println("This menu isn't avaliable at this moment; Try loading sales data");
 				}
 			}
 			else {
