@@ -57,34 +57,13 @@ public class Sales {
 		// check each sale for the first digit
 		for(Sale i: salesData) {
 			String money = String.valueOf(i.giveSales());
-			String firstDig = money.substring(0,1);
-			if(firstDig.equals("1")) {
-				count[1] +=1;
+			int firstDig = Integer.valueOf(money.substring(0,1));
+			for(int b = 1; b<10; b++) {
+				if(firstDig == b) {
+					count[b] += 1;
+				}
 			}
-			if(firstDig.equals("2")) {
-				count[2] +=1;
-			}
-			if(firstDig.equals("3")) {
-				count[3] +=1;
-			}
-			if(firstDig.equals("4")) {
-				count[4] +=1;
-			}
-			if(firstDig.equals("5")) {
-				count[5] +=1;
-			}
-			if(firstDig.equals("6")) {
-				count[6] +=1;
-			}
-			if(firstDig.equals("7")) {
-				count[7] +=1;
-			}
-			if(firstDig.equals("8")) {
-				count[8] +=1;
-			}
-			if(firstDig.equals("9")) {
-				count[9] +=1;
-			}
+			
 		}
 		
 		// check what first digit distribution representation type is used 
