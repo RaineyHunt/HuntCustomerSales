@@ -22,6 +22,13 @@ public class Driver {
 		boolean customer = false;
 		boolean loaded =false;
 		while(cont) {
+			// check if customer accounts exist
+			if(customers.size() != 0) {
+				customer = true;
+			}
+			else {
+				customer = false;
+			}
 			// display menu directory
 			System.out.println("Buisness Analysis System");
 			System.out.println("Enter the corresponding number to open each menu");
@@ -36,6 +43,7 @@ public class Driver {
 				System.out.println("(6) Add New Sales");
 				System.out.println("(7) Remove Postal Code");
 			}
+			System.out.println("(8) Close Buisness Analysis System");
 			
 			Scanner in = new Scanner(System.in);
 			
@@ -62,10 +70,15 @@ public class Driver {
 				while(!valid) {
 					System.out.println("Please enter your postal code; At LEAST 3 characters");
 					d = in.next() + " ";
-					d = d.substring(0,4);
-					if(d.length() >= 3) {
-						if(pCodeVeri(d, postal)) {
-							valid = true;
+					if(d.length()<4) {
+						System.out.println("INVALID");
+					}
+					else {
+						d = d.substring(0,4);
+						if(d.length() >= 3) {
+							if(pCodeVeri(d, postal)) {
+								valid = true;
+							}
 						}
 					}
 					
@@ -89,7 +102,7 @@ public class Driver {
 				customers.add(w);
 				customers.sort();
 				customers.displayArchive();
-				customer = true;
+
 			}
 			else if(menu ==2) {
 				File f = new File("sales.csv");
@@ -221,16 +234,20 @@ public class Driver {
 					System.out.println("This menu isn't avaliable at this moment; Try loading sales data");
 				}
 			}
+			else if(menu ==8) {
+				cont = false;
+			}
 			else {
 				// Say that the menu doesn't exist
 				System.out.println("That was an Invalid menu option");
 			}
-			
-			// Ask if user would like to stop using the program
-			System.out.println("Would you like to stop? Enter Y if yes");
-			String proc = in.next();
-			if(proc.toUpperCase().equals("Y")) {
-				cont = false;
+			if(menu !=8) {
+				// Ask if user would like to stop using the program
+				System.out.println("Would you like to stop? Enter Y if yes");
+				String proc = in.next();
+				if(proc.toUpperCase().equals("Y")) {
+					cont = false;
+				}
 			}
 			
 		}

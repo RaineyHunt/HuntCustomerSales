@@ -103,5 +103,13 @@ public class CustomerArchive {
 		Collections.sort(customers);
 		print();
 	}
+	
+	/**
+	 * give the number of customer accounts the business has
+	 * @return
+	 */
+	public int size() {
+		return customers.size();
+	}
 
 }

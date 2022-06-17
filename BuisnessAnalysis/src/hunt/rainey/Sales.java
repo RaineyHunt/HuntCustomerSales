@@ -30,7 +30,7 @@ public class Sales {
 	}
 	
 	/**
-	 * add a new total sales ro the ArrayList
+	 * add a new total sales to the ArrayList
 	 * @param s
 	 */
 	public void add(Sale s) {
@@ -63,7 +63,6 @@ public class Sales {
 					count[b] += 1;
 				}
 			}
-			
 		}
 		
 		// check what first digit distribution representation type is used 
