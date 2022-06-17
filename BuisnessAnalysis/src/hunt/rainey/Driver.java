@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
-
 /**
  * a program that allows for creation of customer accounts for a buisness, creating a csv file for all customer accounts
  * reporting sales data and checking sales data for fraud
@@ -69,8 +68,8 @@ public class Driver {
 				// Check if postal code is allowed
 				while(!valid) {
 					System.out.println("Please enter your postal code; At LEAST 3 characters");
-					d = in.next() + " ";
-					if(d.length()<4) {
+					d = in.nextLine() + " ";
+					if(d.length()<3) {
 						System.out.println("INVALID");
 					}
 					else {
